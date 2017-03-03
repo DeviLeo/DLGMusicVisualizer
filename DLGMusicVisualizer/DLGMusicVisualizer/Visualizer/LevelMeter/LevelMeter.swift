@@ -49,6 +49,10 @@ class LevelMeter: UIView {
         print("Level Meter deinit")
     }
     
+    @inline(__always) func LEVELMETER_CLAMP<T : Comparable>(min: T, x: T, max: T) -> T {
+        return (x < min ? min : (x > max ? max : x))
+    }
+    
     func compareLevelThresholds(_ a: LevelMeterColorThreshold, _ b: LevelMeterColorThreshold) -> Int {
         if a.maxValue > b.maxValue { return 1 }
         if a.maxValue < b.maxValue { return -1 }
@@ -81,7 +85,8 @@ class LevelMeter: UIView {
             
             for ct in self.colorThresholds {
                 let val: CGFloat = min(ct.maxValue, self.level)
-                let rect: CGRect = CGRect.init(x: 0, y: bounds.size.height * currentTop, width: bounds.size.width, height: bounds.size.height * (val - currentTop))
+                let rect: CGRect = CGRect.init(x: 0, y: bounds.size.height * currentTop,
+                                               width: bounds.size.width, height: bounds.size.height * (val - currentTop))
                 ct.color?.set()
                 ctx?.fill(rect)
                 
@@ -122,15 +127,16 @@ class LevelMeter: UIView {
                 
                 lightColor = self.colorThresholds[0].color
                 let count = self.colorThresholds.count - 1
-                for i in 0 ..< count {
-                    let thisct = self.colorThresholds[i]
-                    let nextct = self.colorThresholds[i + 1]
+                for j in 0 ..< count {
+                    let thisct = self.colorThresholds[j]
+                    let nextct = self.colorThresholds[j + 1]
                     if thisct.maxValue <= lightMaxVal {
                         lightColor = nextct.color
                     }
                 }
                 
-                lightRect = CGRect.init(x: 0, y: bounds.size.height * (CGFloat(i) / CGFloat(self.numLights)), width: bounds.size.width, height: bounds.size.height * (1.0 / CGFloat(self.numLights)))
+                lightRect = CGRect.init(x: 0, y: bounds.size.height * (CGFloat(i) / CGFloat(self.numLights)),
+                                        width: bounds.size.width, height: bounds.size.height * (1.0 / CGFloat(self.numLights)))
                 lightRect = lightRect.insetBy(dx: insetAmount, dy: insetAmount)
                 
                 self.bgColor.set()

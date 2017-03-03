@@ -48,6 +48,7 @@
 		E8D76F2C1E69172D0007E8BC /* MeterTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D76F2B1E69172D0007E8BC /* MeterTable.swift */; };
 		E8D76F321E6922AC0007E8BC /* CALevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D76F311E6922AC0007E8BC /* CALevelMeter.swift */; };
 		E8D76F341E6928120007E8BC /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D76F331E6928120007E8BC /* LevelMeter.swift */; };
+		E8FED37B1E69BF0F008DCA33 /* GLLevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FED37A1E69BF0F008DCA33 /* GLLevelMeter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		E8D76F2B1E69172D0007E8BC /* MeterTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterTable.swift; sourceTree = "<group>"; };
 		E8D76F311E6922AC0007E8BC /* CALevelMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALevelMeter.swift; sourceTree = "<group>"; };
 		E8D76F331E6928120007E8BC /* LevelMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
+		E8FED37A1E69BF0F008DCA33 /* GLLevelMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLLevelMeter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +334,7 @@
 			children = (
 				E8D76F311E6922AC0007E8BC /* CALevelMeter.swift */,
 				E8D76F331E6928120007E8BC /* LevelMeter.swift */,
+				E8FED37A1E69BF0F008DCA33 /* GLLevelMeter.swift */,
 			);
 			path = LevelMeter;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				E82DA5AC1E67B8D600F43A2B /* HTTPRedirectResponse.m in Sources */,
 				E82DA5A01E67B8D600F43A2B /* HTTPAuthenticationRequest.m in Sources */,
 				E82DA5BD1E67B8D600F43A2B /* HTTPUploader.m in Sources */,
+				E8FED37B1E69BF0F008DCA33 /* GLLevelMeter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

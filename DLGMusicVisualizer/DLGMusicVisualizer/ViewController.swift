@@ -22,10 +22,11 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
     @IBOutlet weak var btnPlay: UIButton?
     @IBOutlet weak var btnPrev: UIButton?
     @IBOutlet weak var btnNext: UIButton?
+    @IBOutlet weak var btnSWHW: UIButton?
     @IBOutlet weak var pvProgress: UIProgressView?
     @IBOutlet weak var lblCurrentTime: UILabel?
     @IBOutlet weak var lblTotalTime: UILabel?
-    
+    var landscape: Bool = false;
     var updateTimer: Timer?
     var player: AVAudioPlayer?
     var visualizer: CALevelMeter?
@@ -94,6 +95,7 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
             self.visualizer = nil
         }
         let meter: CALevelMeter = CALevelMeter.init(frame: (self.vContainer?.bounds)!)
+        meter.setUseGL(useGL: (self.btnSWHW?.isSelected)!)
         self.vContainer?.addSubview(meter)
         self.vContainer?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v]|",
                                                                        options: NSLayoutFormatOptions.init(rawValue: 0),
@@ -187,6 +189,11 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
         self.player?.currentTime += 1
     }
     
+    @IBAction func onSWHWTapped(sender: Any) {
+        let hw: Bool = !(self.btnSWHW?.isSelected)!
+        self.visualizer?.setUseGL(useGL: hw)
+        self.btnSWHW?.isSelected = hw
+    }
     
     // MARK: - Gesture
     @IBAction func onTapGestureRecognized(recognizer: UIGestureRecognizer) {
@@ -271,12 +278,22 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        self.landscape = size.width > size.height
+        self.setNeedsStatusBarAppearanceUpdate()
         coordinator.animate(alongsideTransition: nil) { (context) in
             self.initVisualizer()
             if self.player?.isPlaying == true {
                 self.visualizer?.setPlayer(player: self.player)
             }
         }
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return self.landscape
     }
 }
 

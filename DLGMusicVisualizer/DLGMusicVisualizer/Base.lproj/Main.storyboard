@@ -32,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJe-gA-umn">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <rect key="frame" x="80" y="0.0" width="215" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -49,16 +49,32 @@
                                             <action selector="onBackTappedWithSender:" destination="zBs-KV-gev" eventType="touchUpInside" id="xbA-ys-J4O"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-0b-FWP">
+                                        <rect key="frame" x="303" y="0.0" width="64" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="CrV-wX-HON"/>
+                                        </constraints>
+                                        <state key="normal" title="S/W">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="selected" title="H/W"/>
+                                        <connections>
+                                            <action selector="onSWHWTappedWithSender:" destination="zBs-KV-gev" eventType="touchUpInside" id="FxG-TY-fg6"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7rE-ZZ-KJr"/>
                                     <constraint firstItem="qvU-eL-lrZ" firstAttribute="top" secondItem="Xch-Jm-JFN" secondAttribute="top" id="Aju-xA-ION"/>
+                                    <constraint firstItem="qh4-0b-FWP" firstAttribute="top" secondItem="Xch-Jm-JFN" secondAttribute="top" id="B4Z-vj-1YT"/>
+                                    <constraint firstItem="qh4-0b-FWP" firstAttribute="leading" secondItem="bJe-gA-umn" secondAttribute="trailing" constant="8" id="Mpv-vU-g6h"/>
                                     <constraint firstItem="qvU-eL-lrZ" firstAttribute="leading" secondItem="Xch-Jm-JFN" secondAttribute="leading" constant="8" id="Nf1-gm-el7"/>
                                     <constraint firstAttribute="bottom" secondItem="bJe-gA-umn" secondAttribute="bottom" id="Rhj-GT-x2P"/>
-                                    <constraint firstItem="bJe-gA-umn" firstAttribute="leading" secondItem="Xch-Jm-JFN" secondAttribute="leading" id="URT-iZ-FG1"/>
                                     <constraint firstItem="bJe-gA-umn" firstAttribute="top" secondItem="Xch-Jm-JFN" secondAttribute="top" id="eaR-9H-TUB"/>
-                                    <constraint firstAttribute="trailing" secondItem="bJe-gA-umn" secondAttribute="trailing" id="rY8-WW-fBb"/>
+                                    <constraint firstItem="bJe-gA-umn" firstAttribute="leading" secondItem="qvU-eL-lrZ" secondAttribute="trailing" constant="8" id="fzc-hA-8yh"/>
+                                    <constraint firstAttribute="trailing" secondItem="qh4-0b-FWP" secondAttribute="trailing" constant="8" id="kjc-jF-Lrn"/>
+                                    <constraint firstAttribute="bottom" secondItem="qh4-0b-FWP" secondAttribute="bottom" id="naO-zE-c43"/>
                                     <constraint firstAttribute="bottom" secondItem="qvU-eL-lrZ" secondAttribute="bottom" id="zAK-E0-KIa"/>
                                 </constraints>
                             </view>
@@ -166,6 +182,7 @@
                         <outlet property="btnNext" destination="EoY-G5-xHS" id="o4R-8V-loF"/>
                         <outlet property="btnPlay" destination="LXK-Zs-vdz" id="nZW-5g-6n2"/>
                         <outlet property="btnPrev" destination="eVB-e4-bOG" id="qTF-xT-jz0"/>
+                        <outlet property="btnSWHW" destination="qh4-0b-FWP" id="87l-ib-9vD"/>
                         <outlet property="lblCurrentTime" destination="rWg-6a-PDZ" id="nZ1-41-1DH"/>
                         <outlet property="lblTitle" destination="bJe-gA-umn" id="7lF-s8-x4O"/>
                         <outlet property="lblTotalTime" destination="NNd-ge-B8C" id="Ugf-XV-NAV"/>

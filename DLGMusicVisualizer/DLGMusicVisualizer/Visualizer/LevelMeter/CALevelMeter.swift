@@ -23,7 +23,7 @@ class CALevelMeter: UIView {
     var updateTimer: CADisplayLink?
     var showsPeaks: Bool = true
     var vertical: Bool = false
-    var userGL: Bool = false
+    var useGL: Bool = false
     var peakFalloffLastFire: CFAbsoluteTime = 0
     
     
@@ -75,7 +75,7 @@ class CALevelMeter: UIView {
                 let h: CGFloat = (1.0 / CGFloat(count)) * totalRect.size.height - 2.0
                 r = CGRect.init(x: x, y: y, width: w, height: h)
             }
-            let meter: LevelMeter = LevelMeter.init(frame: r)
+            let meter: LevelMeter = self.useGL ? GLLevelMeter.init(frame: r) : LevelMeter.init(frame: r)
             meter.numLights = 30
             meter.vertical = self.vertical
             meters.append(meter)
@@ -180,6 +180,11 @@ class CALevelMeter: UIView {
     
     func setChannels(channels: Array<Int>) {
         self.channelNumbers = channels
+        self.layoutSubLevelMeters()
+    }
+    
+    func setUseGL(useGL: Bool) {
+        self.useGL = useGL
         self.layoutSubLevelMeters()
     }
     

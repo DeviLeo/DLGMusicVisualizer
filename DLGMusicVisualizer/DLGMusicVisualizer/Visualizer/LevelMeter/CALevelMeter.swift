@@ -10,37 +10,17 @@ import UIKit
 import AudioToolbox
 import AVFoundation
 
-class CALevelMeter: UIView {
+class CALevelMeter: BaseVisualizer {
 
     static let kPeakFalloffPerSec: Double = 0.7
     static let kLevelFalloffPerSec: Double = 0.8
-    static let kMinDBvalue: Double = -80.0
     
-    var player: AVAudioPlayer?
-    var channelNumbers: Array<Int> = [0]
     var subLevelMeters: Array<LevelMeter>?
-    var meterTable: MeterTable = MeterTable.init(minDecibels: CALevelMeter.kMinDBvalue)
-    var updateTimer: CADisplayLink?
     var showsPeaks: Bool = true
-    var vertical: Bool = false
-    var useGL: Bool = false
     var peakFalloffLastFire: CFAbsoluteTime = 0
     
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.vertical = frame.size.width < frame.size.height
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.vertical = self.frame.size.width < self.frame.size.height
-    }
-    
-    func registerNotifications() {
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(self.stopTimer), name: .UIApplicationWillResignActive, object: nil)
-        nc.addObserver(self, selector: #selector(self.startTimer), name: .UIApplicationWillEnterForeground, object: nil)
+    override func layoutVisualizer() {
+        self.layoutSubLevelMeters()
     }
     
     func layoutSubLevelMeters() {
@@ -85,7 +65,7 @@ class CALevelMeter: UIView {
         self.subLevelMeters = meters
     }
 
-    func refresh() {
+    override func refresh() {
         var success: Bool = false
         
         // if we have no queue, but still have levels, gradually bring them down
@@ -148,55 +128,17 @@ class CALevelMeter: UIView {
         }
     }
     
-    func setPlayer(player: AVAudioPlayer?) {
-        if self.player == nil && player != nil {
-            if self.updateTimer != nil {
-                self.updateTimer?.invalidate()
-            }
-            self.updateTimer = CADisplayLink.init(target: self, selector: #selector(self.refresh))
-            self.updateTimer?.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
-        } else if self.player != nil && player == nil {
+    override func setPlayer(player: AVAudioPlayer?) {
+        super.setPlayer(player: player)
+        if self.player != nil && player == nil {
             self.peakFalloffLastFire = CFAbsoluteTimeGetCurrent()
         }
         
         self.player = player
-        
-        if self.player != nil {
-            self.player?.isMeteringEnabled = true
-            let channelCount = (self.player?.numberOfChannels)!
-            if self.player?.numberOfChannels != self.channelNumbers.count {
-                var channels: Array<Int> = Array.init()
-                for i in 0 ..< channelCount {
-                    channels.append(i)
-                }
-                self.setChannels(channels: channels)
-            }
-        } else {
+        if player == nil {
             for meter in self.subLevelMeters! {
                 meter.setNeedsDisplay()
             }
         }
-    }
-    
-    func setChannels(channels: Array<Int>) {
-        self.channelNumbers = channels
-        self.layoutSubLevelMeters()
-    }
-    
-    func setUseGL(useGL: Bool) {
-        self.useGL = useGL
-        self.layoutSubLevelMeters()
-    }
-    
-    @objc func startTimer() {
-        if self.player != nil {
-            self.updateTimer = CADisplayLink.init(target: self, selector: #selector(self.refresh))
-            self.updateTimer?.add(to: RunLoop.current, forMode: .defaultRunLoopMode)
-        }
-    }
-    
-    @objc func stopTimer() {
-        self.updateTimer?.invalidate()
-        self.updateTimer = nil
     }
 }

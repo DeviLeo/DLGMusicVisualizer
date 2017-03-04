@@ -9,6 +9,11 @@
 import UIKit
 import AVFoundation
 
+enum VisualizerType: Int {
+    case LevelMeter
+    case Circle
+}
+
 @objc(ViewController)
 class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDelegate {
     
@@ -29,7 +34,8 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
     var landscape: Bool = false;
     var updateTimer: Timer?
     var player: AVAudioPlayer?
-    var visualizer: CALevelMeter?
+    var visualizer: BaseVisualizer?
+    var visualizerType: VisualizerType = .Circle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,18 +100,27 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
             self.visualizer?.removeFromSuperview()
             self.visualizer = nil
         }
-        let meter: CALevelMeter = CALevelMeter.init(frame: (self.vContainer?.bounds)!)
-        meter.setUseGL(useGL: (self.btnSWHW?.isSelected)!)
-        self.vContainer?.addSubview(meter)
+        let visualizer = self.chooseVisualizer(type: self.visualizerType)
+        visualizer.setUseGL(useGL: (self.btnSWHW?.isSelected)!)
+        self.vContainer?.addSubview(visualizer)
         self.vContainer?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v]|",
                                                                        options: NSLayoutFormatOptions.init(rawValue: 0),
                                                                        metrics: nil,
-                                                                       views: ["v":meter]))
+                                                                       views: ["v":visualizer]))
         self.vContainer?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v]|",
                                                                        options: NSLayoutFormatOptions.init(rawValue: 0),
                                                                        metrics: nil,
-                                                                       views: ["v":meter]))
-        self.visualizer = meter
+                                                                       views: ["v":visualizer]))
+        self.visualizer = visualizer
+    }
+    
+    func chooseVisualizer(type: VisualizerType) -> BaseVisualizer {
+        let bounds = (self.vContainer?.bounds)!
+        if type == .Circle {
+            return CircleVisualizer.init(frame: bounds)
+        } else {
+            return CALevelMeter.init(frame: bounds)
+        }
     }
     
     func registerNotificaions() {
@@ -158,6 +173,7 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
         self.startUpdateTimer()
         self.btnPlay?.isSelected = true
         self.visualizer?.setPlayer(player: self.player)
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
     func pauseAudio() {
@@ -165,6 +181,7 @@ class ViewController: UIViewController, AVAudioSessionDelegate, AVAudioPlayerDel
         self.stopUpdateTimer()
         self.btnPlay?.isSelected = false
         self.visualizer?.setPlayer(player: nil)
+        UIApplication.shared.isIdleTimerDisabled = false
     }
     
     // MARK: - Events

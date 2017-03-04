@@ -45,6 +45,8 @@
 		E82DA5BE1E67B8D600F43A2B /* WebUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E82DA59A1E67B8D600F43A2B /* WebUtils.m */; };
 		E82DA5C01E67B8F000F43A2B /* web in Resources */ = {isa = PBXBuildFile; fileRef = E82DA5BF1E67B8F000F43A2B /* web */; };
 		E82DA5C21E67CAB200F43A2B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82DA5C11E67CAB200F43A2B /* MainViewController.swift */; };
+		E83362C41E6A8FC500D78256 /* BaseVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83362C31E6A8FC500D78256 /* BaseVisualizer.swift */; };
+		E83362C61E6A94A700D78256 /* CircleVisualizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E83362C51E6A94A700D78256 /* CircleVisualizer.swift */; };
 		E8D76F2C1E69172D0007E8BC /* MeterTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D76F2B1E69172D0007E8BC /* MeterTable.swift */; };
 		E8D76F321E6922AC0007E8BC /* CALevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D76F311E6922AC0007E8BC /* CALevelMeter.swift */; };
 		E8D76F341E6928120007E8BC /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D76F331E6928120007E8BC /* LevelMeter.swift */; };
@@ -126,6 +128,8 @@
 		E82DA5BF1E67B8F000F43A2B /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; path = web; sourceTree = "<group>"; };
 		E82DA5C11E67CAB200F43A2B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E82DA5C91E67CEB700F43A2B /* DLGMusicVisualizer-Bridge-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DLGMusicVisualizer-Bridge-Header.h"; sourceTree = "<group>"; };
+		E83362C31E6A8FC500D78256 /* BaseVisualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVisualizer.swift; sourceTree = "<group>"; };
+		E83362C51E6A94A700D78256 /* CircleVisualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleVisualizer.swift; sourceTree = "<group>"; };
 		E8D76F2B1E69172D0007E8BC /* MeterTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterTable.swift; sourceTree = "<group>"; };
 		E8D76F311E6922AC0007E8BC /* CALevelMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALevelMeter.swift; sourceTree = "<group>"; };
 		E8D76F331E6928120007E8BC /* LevelMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
@@ -321,10 +325,20 @@
 			path = Web;
 			sourceTree = "<group>";
 		};
+		E83362C21E6A8FAA00D78256 /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				E83362C51E6A94A700D78256 /* CircleVisualizer.swift */,
+			);
+			path = Circle;
+			sourceTree = "<group>";
+		};
 		E8D76F2F1E6922840007E8BC /* Visualizer */ = {
 			isa = PBXGroup;
 			children = (
+				E83362C21E6A8FAA00D78256 /* Circle */,
 				E8D76F301E6922850007E8BC /* LevelMeter */,
+				E83362C31E6A8FC500D78256 /* BaseVisualizer.swift */,
 			);
 			path = Visualizer;
 			sourceTree = "<group>";
@@ -418,6 +432,7 @@
 				E82DA5B01E67B8D600F43A2B /* DDFileLogger.m in Sources */,
 				E82DA5AA1E67B8D600F43A2B /* HTTPErrorResponse.m in Sources */,
 				E82DA5B31E67B8D600F43A2B /* DDContextFilterLogFormatter.m in Sources */,
+				E83362C41E6A8FC500D78256 /* BaseVisualizer.swift in Sources */,
 				E82DA5B51E67B8D600F43A2B /* DDMultiFormatter.m in Sources */,
 				E82DA5A11E67B8D600F43A2B /* HTTPConnection.m in Sources */,
 				E82DA59B1E67B8D600F43A2B /* GCDAsyncSocket.m in Sources */,
@@ -439,6 +454,7 @@
 				E82DA5BE1E67B8D600F43A2B /* WebUtils.m in Sources */,
 				E82DA5AE1E67B8D600F43A2B /* DDAbstractDatabaseLogger.m in Sources */,
 				E8D76F341E6928120007E8BC /* LevelMeter.swift in Sources */,
+				E83362C61E6A94A700D78256 /* CircleVisualizer.swift in Sources */,
 				E82DA5A21E67B8D600F43A2B /* HTTPMessage.m in Sources */,
 				E82DA5B21E67B8D600F43A2B /* DDTTYLogger.m in Sources */,
 				E82DA5A41E67B8D600F43A2B /* MultipartFormDataParser.m in Sources */,
